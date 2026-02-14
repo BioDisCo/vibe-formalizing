@@ -11,12 +11,12 @@ The setup uses Claude Code and Codex via an MCP server for theorem proving and c
 
 Start by installing the three core pieces: **Lean 4**, **Claude Code**, and **Node.js** (v18+).
 
-For Lean, head to [lean-lang.org](https://lean-lang.org/) (or on macOS, just `brew install lean`). Claude Code installs via `npm install -g @anthropic-ai/claude`, or grab the latest [release](https://github.com/anthropics/claude-code/releases) if you prefer.
+For Lean, head to [lean-lang.org](https://lean-lang.org/). Claude Code installs via `npm install -g @anthropic-ai/claude`, or grab the latest [release](https://github.com/anthropics/claude-code/releases) if you prefer.
 
 Once you have those, clone this repository and install dependencies:
 
 ```bash
-git clone https://github.com/your-org/vibe-formalizing.git
+git clone https://github.com/BioDisCo/vibe-formalizing.git
 cd vibe-formalizing
 npm install
 ```
@@ -39,7 +39,7 @@ The real magic happens when you add the Codex MCP server. This plugs advanced ma
 
 ```bash
 claude code mcp add codex -s user -- codex \
-  -m gpt-5.1-codex-max \
+  -m gpt-5.3-codex \
   -c model_reasoning_effort="high" \
   mcp-server .
 ```
@@ -48,15 +48,15 @@ This sets up a powerful reasoning backend that helps with proofs, verification, 
 
 ## Using It
 
-Start a session with `claude code`. When Claude connects, give it this initial prompt to get oriented:
+Start a session with `claude`. When Claude connects, give it this initial prompt to get oriented:
 
 ```
-Follow the instructions in vibe-formalizing.md
+Follow the instructions in INSTRUCTIONS.md
 ```
 
 This tells Claude to read the project-specific guidance and context. From there, Claude will generate a `TODO.md` and ask Codex to formalize a lemma or theorem in the paper. Codex reports on progress continuously in a status file. Once done with a statement, it asks Claude to review the formalization - in particular the consistency of the statement with the paper. Test is against Lean, which on success of Lean and the correspondence report by Claude, adds a badge to the paper tex.
 
-Before diving into a task, check the markdown files in this repository—they'll give you context and guidance on what's in progress.
+Before diving into a task, check the markdown files in this repository; they'll give you context and guidance on what's in progress.
 
 You may also want to use `tail -F` to live view todo and report files during the potentially long back and froth between the agents.
 
@@ -71,7 +71,7 @@ Want to customize keybindings? Try `claude code /keybindings-help`.
 **MCP server not showing up?** Run `claude code --debug` and check `mcp --list-servers`. If it's really stuck, remove and re-add:
 ```bash
 claude code mcp remove codex
-claude code mcp add codex -s user -- codex -m gpt-5.1-codex-max -c model_reasoning_effort="high" mcp-server .
+claude code mcp add codex -s user -- codex -m gpt-5.3-codex -c model_reasoning_effort="high" mcp-server .
 ```
 
 **Lean missing?** Make sure it's in your PATH with `which lean` and `lean --version`.
