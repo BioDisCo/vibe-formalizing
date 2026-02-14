@@ -2,8 +2,9 @@
 
 This is our setup for formalization of our papers from Theoretical Computer Science (TCS).
 The idea is to use agent AI to verify (some of) the proofs in our papers.
-For the lemmas or theorems were we are confident that a formal proof has been obtained, we add a badge to the tex code that links to the formalization.
+For the lemmas or theorems where we are confident that a formal proof has been obtained, we add a badge to the tex code that links to the formalization.
 Currently we use Lean as a theorem proofer.
+See this [short YouTube video](https://youtu.be/rE5_Zc2AMwM) for an example.
 
 The setup uses Claude Code and Codex via an MCP server for theorem proving and computational verification. We're constantly improving this workflow and would love to hear your thoughts on how we can improve it. Feel free to share feedback, ideas, or issues as you explore!
 
